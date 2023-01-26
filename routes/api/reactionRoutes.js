@@ -3,8 +3,7 @@ const {
   getReactions,
   getSingleReaction,
   createReaction,
-} = require('../../controllers/tagController');
-// update controllers
+} = require('../../controllers/reactionController');
 
 // /api/users
 router.route('/').get(getReactions).post(createReaction);

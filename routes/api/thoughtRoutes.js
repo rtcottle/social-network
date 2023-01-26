@@ -3,7 +3,7 @@ const {
   getSingleThought,
   getThoughts,
   createThought,
-} = require('../../controllers/postController');
+} = require('../../controllers/thoughtController');
 // update names of controllers post = thought tag = reaction
 
 router.route('/').get(getThoughts).post(createThought);

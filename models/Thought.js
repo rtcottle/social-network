@@ -11,7 +11,6 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    //TODO: change reference here
     reactions: [
       {
         type: Schema.Types.ObjectId,
