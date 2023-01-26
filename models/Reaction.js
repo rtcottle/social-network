@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 
-const tagSchema = new Schema(
+const reactionSchema = new Schema(
   {
-    tagName: {
+    reactionName: {
       type: String,
       required: true,
     },
@@ -19,13 +19,13 @@ const tagSchema = new Schema(
   }
 );
 
-tagSchema
+reactionSchema
   .virtual('getTagCss')
   // Getter
   .get(function () {
     return `color: ${this.color}`;
   });
 
-const Tag = model('tag', tagSchema);
+const Reaction = model('reactions', reactionSchema);
 
-module.exports = Tag;
+module.exports = Reaction;

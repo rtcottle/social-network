@@ -22,7 +22,11 @@ This is a NoSQL backend API that allows for posts and comments.
 
 ## Installation
 
+Installation of this project is not needed as it runs through Heroku.
+
 ## Usage
+
+Use this app to post about whatever fancies your taste and allow friends to comment on your posts.
 
 ## Credits
 
