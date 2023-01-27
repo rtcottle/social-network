@@ -55,4 +55,24 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  deleteReaction(req, res) {
+    Reactions.findOneAndRemove({ _id: req.params.reactionId })
+      .then((reaction) =>
+        !reaction
+          ? res.status(404).json({ message: 'No reaction with this id!' })
+          : User.findOneAndUpdate(
+              { reactions: req.params.reactionId },
+              { $pull: { reactions: req.params.reactionId } },
+              { new: true }
+            )
+      )
+      .then((user) =>
+        !user
+          ? res.status(404).json({
+              message: 'Reaction created but no user with this id!',
+            })
+          : res.json({ message: 'Reaction successfully deleted! ' })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
