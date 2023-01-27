@@ -20,7 +20,7 @@ const reactionSchema = new Schema(
 );
 
 reactionSchema
-  .virtual('getTagCss')
+  .virtual('getReactionCss')
   // Getter
   .get(function () {
     return `color: ${this.color}`;
