@@ -27,11 +27,11 @@ connection.once('open', async () => {
 
   // Create 20 random reactions and push them into the reactions array
   for (let i = 0; i < 20; i++) {
-    const thoughtName = getRandomColor();
+    const reactionname = getRandomColor();
 
     reactions.push({
-      thoughtName,
-      color: thoughtName,
+      reactionname,
+      color: reactionname,
     });
   }
 

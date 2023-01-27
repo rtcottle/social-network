@@ -14,7 +14,7 @@ const thoughtSchema = new Schema(
     reactions: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'reaction',
+        ref: 'reactions',
       },
     ],
     text: {
@@ -31,9 +31,9 @@ const thoughtSchema = new Schema(
   }
 );
 
-// Creates a virtual property `thoughtCount` that gets the amount of thoughts per user
+// Creates a virtual property `reactionCount` that gets the amount of reactions per user
 thoughtSchema
-  .virtual('thoughtCount')
+  .virtual('reactionCount')
   // Getter
   .get(function () {
     return this.reactions.length;

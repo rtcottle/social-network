@@ -4,7 +4,7 @@ module.exports = {
   getReactions(req, res) {
     Reactions.find({})
       .select('-__v')
-      .then((Reactions) => res.json(Reactions))
+      .then((reactions) => res.json(reactions))
       .catch((err) => res.status(500).json(err));
   },
   getSingleReaction(req, res) {
@@ -33,6 +33,22 @@ module.exports = {
               message: 'Reaction created, but found no thought with that ID',
             })
           : res.json('Created the reaction!')
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+  updateReaction(req, res) {
+    Reactions.findOneAndUpdate(
+      { _id: req.params.reactionId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    )
+      .then((reaction) =>
+        !reaction
+          ? res.status(404).json({ message: 'No reaction with this id!' })
+          : res.json(reaction)
       )
       .catch((err) => {
         console.log(err);
