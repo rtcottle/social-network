@@ -1,15 +1,15 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create User model
-const userSchema = new Schema(
+const friendSchema = new Schema(
   {
     first: String,
     last: String,
     age: Number,
-    thoughts: [
+    users: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'thought',
+        ref: 'user',
       },
     ],
   },
@@ -21,8 +21,8 @@ const userSchema = new Schema(
   }
 );
 
-// Create a virtual property `fullName` that gets and sets the user's full name
-userSchema
+// Create a virtual property `fullName` that gets and sets the friend's full name
+friendSchema
   .virtual('fullName')
   // Getter
   .get(function () {
@@ -35,7 +35,7 @@ userSchema
     this.set({ first, last });
   });
 
-// Initialize our User model
-const User = model('user', userSchema);
+// Initialize our Friend model
+const Friend = model('friends', friendSchema);
 
-module.exports = User;
+module.exports = Friend;
