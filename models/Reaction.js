@@ -26,6 +26,6 @@ reactionSchema
     return `color: ${this.color}`;
   });
 
-const Reaction = model('reactions', reactionSchema);
+const Reaction = model('reaction', reactionSchema);
 
 module.exports = Reaction;

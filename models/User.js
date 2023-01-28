@@ -1,5 +1,3 @@
-//TODO: add user model
-
 const { Schema, model } = require('mongoose');
 
 // Schema to create User model
@@ -8,10 +6,10 @@ const userSchema = new Schema(
     first: String,
     last: String,
     age: Number,
-    applications: [
+    thoughts: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Application',
+        ref: 'thought',
       },
     ],
   },

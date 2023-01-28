@@ -3,11 +3,18 @@ const {
   getSingleThought,
   getThoughts,
   createThought,
+  updateThought,
+  deleteThought,
 } = require('../../controllers/thoughtController');
-// update names of controllers post = thought tag = reaction
 
+// /api/thoughts
 router.route('/').get(getThoughts).post(createThought);
 
-router.route('/:thoughtId').get(getSingleThought);
+// /api/thoughts/:thought-id
+router
+  .route('/:thoughtId')
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(deleteThought);
 
 module.exports = router;
