@@ -15,28 +15,27 @@ module.exports = {
       .select('-__v')
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with that ID' })
+          ? res.status(404).json({ message: 'No friend with that ID' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
-  // create a new user
+  // create a new friend
+  // TODO: steps: create friend, tie to user
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a user and associated thoughts
+  // Delete a friend
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No user with that ID' })
+          ? res.status(404).json({ message: 'No friend with that ID' })
           : Thoughts.deleteMany({ _id: { $in: user.applications } })
       )
-      .then(() =>
-        res.json({ message: 'User and associated thoughts deleted!' })
-      )
+      .then(() => res.json({ message: 'Friend removed!' }))
       .catch((err) => res.status(500).json(err));
   },
 };
