@@ -4,13 +4,13 @@ const { Friend, User } = require('../models');
 module.exports = {
   // Get all users
   // NOT SURE THIS IS NEEDED -->
-  getUsers(req, res) {
-    User.find()
-      .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
-  },
+  // getUsers(req, res) {
+  //   User.find()
+  //     .then((users) => res.json(users))
+  //     .catch((err) => res.status(500).json(err));
+  // },
   // Get a single user
-  getSingleUser(req, res) {
+  addFriend(req, res) {
     User.findOne({ _id: req.params.userId })
       .select('-__v')
       .then((user) =>

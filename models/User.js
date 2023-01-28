@@ -12,6 +12,12 @@ const userSchema = new Schema(
         ref: 'thought',
       },
     ],
+    reactions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'reaction',
+      },
+    ],
   },
   {
     toJSON: {
