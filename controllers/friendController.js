@@ -1,4 +1,3 @@
-// TODO: add friend controller here.
 const { Friend, User } = require('../models');
 
 module.exports = {
@@ -26,7 +25,7 @@ module.exports = {
     Friend.findOneAndDelete({ _id: req.params.friendId })
       .then((friend) =>
         !friend
-          ? res.status(404).json({ message: 'No friend with that ID' })
+          ? res.status(404).json({ message: 'No friend with that id' })
           : User.findOneAndUpdate(
               { friends: req.params.friendId },
               { $pull: { friends: req.params.friendId } },
