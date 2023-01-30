@@ -10,8 +10,7 @@ const reactionSchema = new Schema(
       type: String,
       default: '#008080',
     },
-    createdAt: Date,
-    default: Date.now,
+    createdAt: { type: Date, default: Date.now },
   },
   {
     toJSON: {

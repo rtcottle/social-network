@@ -3,13 +3,15 @@ const { Schema, model } = require('mongoose');
 // Schema to create Thought model
 const thoughtSchema = new Schema(
   {
-    published: {
-      type: Boolean,
-      default: false,
+    thoughtText: {
+      type: String,
+      required: true,
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       type: Date,
-      // default: Date.now,
+      default: Date.now,
     },
     reactions: [
       {
@@ -17,11 +19,6 @@ const thoughtSchema = new Schema(
         ref: 'reaction',
       },
     ],
-    text: {
-      type: String,
-      minLength: 15,
-      maxLength: 500,
-    },
   },
   {
     toJSON: {
