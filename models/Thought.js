@@ -12,11 +12,18 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: dateFormat,
     },
+    username: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    ],
     reactions: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'reaction',
+        ref: 'reactionSchema',
       },
     ],
   },
@@ -27,6 +34,8 @@ const thoughtSchema = new Schema(
     id: false,
   }
 );
+
+function dateFormat(Date) {}
 
 // Creates a virtual property `reactionCount` that gets the amount of reactions per user
 thoughtSchema

@@ -1,14 +1,16 @@
-const { Schema, model } = require('mongoose');
+const { Schema, default: mongoose } = require('mongoose');
 
 const reactionSchema = new Schema(
   {
-    reactionName: {
+    reactionId: mongoose.ObjectId,
+    reactionBody: {
       type: String,
       required: true,
+      max: 280,
     },
-    color: {
+    username: {
       type: String,
-      default: '#008080',
+      required: true,
     },
     createdAt: { type: Date, default: Date.now },
   },
@@ -19,13 +21,4 @@ const reactionSchema = new Schema(
   }
 );
 
-reactionSchema
-  .virtual('getReactionCss')
-  // Getter
-  .get(function () {
-    return `color: ${this.color}`;
-  });
-
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

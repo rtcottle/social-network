@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// TODO: update controller to be add and delete reaction
 const {
   createReaction,
   deleteReaction,
