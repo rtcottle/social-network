@@ -12,7 +12,7 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      Date: dayjs.format(),
+      default: Date.now,
     },
     username: [
       {
@@ -35,7 +35,11 @@ const thoughtSchema = new Schema(
   }
 );
 
-function dateFormat(Date) {}
+thoughtSchema.virtual('getDate').get(function () {
+  const date = this.createdAt;
+  const dayjsDate = dayjs(date);
+  return dayjsDate.format('DD/MM/YYYY');
+});
 
 // Creates a virtual property `reactionCount` that gets the amount of reactions per user
 thoughtSchema
