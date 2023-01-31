@@ -10,6 +10,7 @@ const reactionSchema = new Schema(
       max: 280,
     },
     username: {
+      // TODO: reference?
       type: String,
       required: true,
     },

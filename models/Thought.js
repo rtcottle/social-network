@@ -15,6 +15,7 @@ const thoughtSchema = new Schema(
       default: Date.now,
     },
     username: [
+      //TODO: is this and reactions being referrenced correctly?
       {
         type: Schema.Types.ObjectId,
         ref: 'user',
