@@ -1,11 +1,11 @@
-const { Friend, User } = require('../models');
+const { Friends, Users } = require('../models');
 
 module.exports = {
   // add a friend
   addFriend(req, res) {
-    Friend.create(req.body)
+    Friends.create(req.body)
       .then((friend) => {
-        return User.findOneAndUpdate(
+        return Users.findOneAndUpdate(
           { _id: req.params.userId },
           { $addToSet: { friends: friend._id } },
           { new: true }
@@ -22,11 +22,11 @@ module.exports = {
   },
   // delete a friend
   deleteFriend(req, res) {
-    Friend.findOneAndDelete({ _id: req.params.friendId })
+    Friends.findOneAndDelete({ _id: req.params.friendId })
       .then((friend) =>
         !friend
           ? res.status(404).json({ message: 'No friend with that id' })
-          : User.findOneAndUpdate(
+          : Users.findOneAndUpdate(
               { friends: req.params.friendId },
               { $pull: { friends: req.params.friendId } },
               { new: true }

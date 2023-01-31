@@ -25,6 +25,7 @@ module.exports = {
   // create a new thought
   createThought(req, res) {
     Thoughts.create(req.body)
+      .populate({ path: 'username' })
       .then((thought) => res.json(thought))
       .catch((err) => res.status(500).json(err));
   },
