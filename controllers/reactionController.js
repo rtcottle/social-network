@@ -8,7 +8,7 @@ module.exports = {
       .then((reaction) => {
         return Thoughts.findOneAndUpdate(
           { _id: req.body.thoughtId },
-          { $addToSet: { reactions: reaction._id } },
+          { $addToSet: { reactions: reactionId } },
           { new: true }
         );
       })
