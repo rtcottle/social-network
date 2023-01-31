@@ -1,9 +1,10 @@
-const { Reactions, Thoughts } = require('../models');
+const { reactionSchema, Thoughts } = require('../models');
 
 module.exports = {
   // create a new reaction
   createReaction(req, res) {
-    Reactions.create(req.body)
+    reactionSchema
+      .create(req.body)
       .then((reaction) => {
         return Thoughts.findOneAndUpdate(
           { _id: req.body.thoughtId },
@@ -40,7 +41,8 @@ module.exports = {
   //     });
   // },
   deleteReaction(req, res) {
-    Reactions.findOneAndRemove({ _id: req.params.reactionId })
+    reactionSchema
+      .findOneAndRemove({ _id: req.params.reactionId })
       .then((reaction) =>
         !reaction
           ? res.status(404).json({ message: 'No reaction with this id!' })

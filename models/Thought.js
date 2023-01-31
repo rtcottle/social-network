@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dayjs = require('dayjs');
 
 // Schema to create Thought model
 const thoughtSchema = new Schema(
@@ -11,8 +12,7 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
-      get: dateFormat,
+      Date: dayjs.format(),
     },
     username: [
       {
