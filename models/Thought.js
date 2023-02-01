@@ -14,13 +14,10 @@ const thoughtSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    username: [
-      //TODO: is this and reactions being referrenced correctly?
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-      },
-    ],
+    username: {
+      type: String,
+      required: true,
+    },
     reactions: [
       {
         type: Schema.Types.ObjectId,

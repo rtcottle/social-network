@@ -1,10 +1,9 @@
-const { Thoughts } = require('../models');
+const { Thoughts, Users } = require('../models');
 
 module.exports = {
   // get all thoughts
   getThoughts(req, res) {
     Thoughts.find()
-      .populate({ path: 'reactions', select: '-__v' })
       .then((thoughts) => res.json(thoughts))
       .catch((err) => {
         console.error({ message: err });
@@ -14,7 +13,6 @@ module.exports = {
   // get a single thought
   getSingleThought(req, res) {
     Thoughts.findOne({ _id: req.params.thoughtId })
-      .populate({ path: 'reactions', select: '-__v' })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
@@ -24,16 +22,27 @@ module.exports = {
   },
   // create a new thought
   createThought(req, res) {
+    console.log(req.body);
     Thoughts.create(req.body)
-      .populate({ path: 'username' })
-      .then((thought) => res.json(thought))
-      .catch((err) => res.status(500).json(err));
+      .then((thought) => {
+        Users.findOneAndUpdate(
+          { _id: req.body.userId },
+          { $addToSet: { thoughts: thought._id } },
+          { new: true }
+        ).then((user) => {
+          res.json(thought);
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).json(err);
+      });
   },
   // update a thought
   updateThought(req, res) {
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $set: req.body },
+      { $set: { thoughtText: req.body } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
@@ -52,7 +61,7 @@ module.exports = {
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with this id!' })
-          : User.findOneAndUpdate(
+          : Users.findOneAndUpdate(
               { thoughts: req.params.thoughtId },
               { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
