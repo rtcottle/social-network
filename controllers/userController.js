@@ -72,7 +72,7 @@ module.exports = {
   },
   // delete a friend
   deleteFriend(req, res) {
-    Friends.findOneAndDelete({ _id: req.params.friendId })
+    Users.findOneAndDelete({ _id: req.params.friendId })
       .then((friend) =>
         !friend
           ? res.status(404).json({ message: 'No friend with that id' })
