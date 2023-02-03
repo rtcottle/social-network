@@ -22,7 +22,7 @@ This is a NoSQL backend API that allows for posts and comments.
 
 ## Installation
 
-Installation of this project is not needed as it runs through Heroku.
+Run "npm i" in the integrated terminal to install dependencies then "npm start" to begin the app.
 
 ## Usage
 
