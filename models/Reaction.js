@@ -1,9 +1,9 @@
-const { Schema, default: mongoose } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 const dayjs = require('dayjs');
 
 const reactionSchema = new Schema(
   {
-    reactionId: mongoose.ObjectId,
+    reactionId: { type: Types.ObjectId, default: () => Types.ObjectId() },
     reactionBody: {
       type: String,
       required: true,
@@ -16,19 +16,18 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (ts) => {
+        const dayjsDate = dayjs(ts);
+        return dayjsDate.format('DD/MM/YYYY');
+      },
     },
   },
   {
     toJSON: {
-      virtuals: true,
+      getters: true,
     },
+    id: false,
   }
 );
-
-reactionSchema.virtual('getDate').get(function () {
-  const date = this.createdAt;
-  const dayjsDate = dayjs(date);
-  return dayjsDate.format('DD/MM/YYYY');
-});
 
 module.exports = reactionSchema;

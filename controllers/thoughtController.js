@@ -1,4 +1,5 @@
 const { Thoughts, Users } = require('../models');
+const reactionSchema = require('../models/Reaction');
 
 module.exports = {
   // get all thoughts
@@ -41,7 +42,6 @@ module.exports = {
   },
   // update a thought
   updateThought(req, res) {
-    console.log(req.params);
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: { thoughtText: req.body.thoughtText } },
@@ -82,7 +82,7 @@ module.exports = {
   addReaction(req, res) {
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
-      { $addToSet: { reactions: req.body.reactionBody } },
+      { $addToSet: { reactions: req.body } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
@@ -92,7 +92,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // delete reaction to thought
+  // delete reaction from thought
   removeReaction(req, res) {
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtsId },

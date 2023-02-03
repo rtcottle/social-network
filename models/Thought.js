@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
 const dayjs = require('dayjs');
 
 // Schema to create Thought model
@@ -13,31 +14,25 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (ts) => {
+        const dayjsDate = dayjs(ts);
+        return dayjsDate.format('DD/MM/YYYY');
+      },
     },
     username: {
       type: String,
       required: true,
     },
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'reactionSchema',
-      },
-    ],
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
 );
-
-thoughtSchema.virtual('getDate').get(function () {
-  const date = this.createdAt;
-  const dayjsDate = dayjs(date);
-  return dayjsDate.format('DD/MM/YYYY');
-});
 
 // Creates a virtual property `reactionCount` that gets the amount of reactions per user
 thoughtSchema
