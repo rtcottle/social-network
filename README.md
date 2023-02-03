@@ -36,13 +36,15 @@ This project is under the [![License: MIT](https://img.shields.io/badge/License-
 
 ## Features
 
+This app allows you to create, update, and remove users, add friends, add thoughts, and reactions to thoughts.
+
 ## How to Contribute
 
 Github
 
 ## Tests
 
-Open the integrated terminal and run npm run start. Then open insomnia and run get and post requests to read or create posts.
+Open the integrated terminal and run npm run start. Then open insomnia and run get, post, put, and delete requests to both users and thoughts to see them change.
 
 ## Questions
 
