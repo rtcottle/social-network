@@ -1,5 +1,5 @@
 const { Thoughts, Users } = require('../models');
-const reactionSchema = require('../models/Reaction');
+// const reactionSchema = require('../models/Reaction');
 
 module.exports = {
   // get all thoughts
@@ -13,7 +13,6 @@ module.exports = {
   },
   // get a single thought
   getSingleThought(req, res) {
-    console.log(req.params);
     Thoughts.findOne({ _id: req.params.thoughtId })
       .select('-__v')
       .then((thought) =>
@@ -94,6 +93,11 @@ module.exports = {
   },
   // delete reaction from thought
   removeReaction(req, res) {
+    // console.log(req.params);
+    // Thoughts.findOne({ reactions: req.params.reactionId })
+    //   .then((reaction) =>
+    //     !reaction
+    //       ? res.status(404).json({ message: 'No reaction with that id' })     :
     Thoughts.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $pull: { reactions: req.params.reactionId } },
